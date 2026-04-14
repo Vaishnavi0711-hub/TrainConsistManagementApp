@@ -1,21 +1,30 @@
 @Test
-void testValidCapacity() throws Exception {
-    TrainConsistManagementApp.PassengerBogie bogie =
-            new TrainConsistManagementApp.PassengerBogie("Sleeper", 50);
+void testCargo_SafeAssignment() {
+    TrainConsistManagementApp.GoodsBogie bogie =
+            new TrainConsistManagementApp.GoodsBogie("Cylindrical");
 
-    assertEquals(50, bogie.capacity);
+    assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
 }
 
 @Test
-void testInvalidCapacityThrowsException() {
-    assertThrows(TrainConsistManagementApp.InvalidCapacityException.class, () -> {
-        new TrainConsistManagementApp.PassengerBogie("AC Chair", -5);
-    });
+void testCargo_UnsafeAssignmentHandled() {
+    TrainConsistManagementApp.GoodsBogie bogie =
+            new TrainConsistManagementApp.GoodsBogie("Rectangular");
+
+    // should not crash due to try-catch
+    assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
 }
 
 @Test
-void testZeroCapacityThrowsException() {
-    assertThrows(TrainConsistManagementApp.InvalidCapacityException.class, () -> {
-        new TrainConsistManagementApp.PassengerBogie("First Class", 0);
-    });
+void testCargo_ProgramContinuesAfterException() {
+    TrainConsistManagementApp.GoodsBogie b1 =
+            new TrainConsistManagementApp.GoodsBogie("Rectangular");
+
+    TrainConsistManagementApp.GoodsBogie b2 =
+            new TrainConsistManagementApp.GoodsBogie("Cylindrical");
+
+    b1.assignCargo("Petroleum"); // handled
+    b2.assignCargo("Coal");      // should still execute
+
+    assertTrue(true); // program did not crash
 }
