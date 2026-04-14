@@ -25,7 +25,7 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC10 - Total Train Seating Capacity");
+        System.out.println("UC10 - Total Train Seating Capacityfbhsbfhksfbkhsbfksbfsbhbhkfshkfkshfhksbhks");
         System.out.println("====================================\n");
 
         List<Bogie> bogies = new ArrayList<>();
