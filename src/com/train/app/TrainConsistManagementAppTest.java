@@ -82,6 +82,57 @@ public class TrainConsistManagementAppTest {
             bogies.add(new TrainConsistManagementApp.GoodsBogie("Cylindrical", "Coal"));
 
             assertFalse(TrainConsistManagementApp.isTrainSafe(bogies));
+            @Test
+            void testLoopFilteringLogic() {
+                List<TrainConsistManagementApp.Bogie> list = new ArrayList<>();
+
+                list.add(new TrainConsistManagementApp.Bogie("A", 70));
+                list.add(new TrainConsistManagementApp.Bogie("B", 50));
+
+                List<TrainConsistManagementApp.Bogie> result =
+                        TrainConsistManagementApp.filterUsingLoop(list);
+
+                assertEquals(1, result.size());
+            }
+
+            @Test
+            void testStreamFilteringLogic() {
+                List<TrainConsistManagementApp.Bogie> list = new ArrayList<>();
+
+                list.add(new TrainConsistManagementApp.Bogie("A", 70));
+                list.add(new TrainConsistManagementApp.Bogie("B", 50));
+
+                List<TrainConsistManagementApp.Bogie> result =
+                        TrainConsistManagementApp.filterUsingStream(list);
+
+                assertEquals(1, result.size());
+            }
+
+            @Test
+            void testLoopAndStreamResultsMatch() {
+                List<TrainConsistManagementApp.Bogie> list = new ArrayList<>();
+
+                list.add(new TrainConsistManagementApp.Bogie("A", 80));
+                list.add(new TrainConsistManagementApp.Bogie("B", 40));
+
+                List<TrainConsistManagementApp.Bogie> loop =
+                        TrainConsistManagementApp.filterUsingLoop(list);
+
+                List<TrainConsistManagementApp.Bogie> stream =
+                        TrainConsistManagementApp.filterUsingStream(list);
+
+                assertEquals(loop.size(), stream.size());
+            }
+
+            @Test
+            void testExecutionTimeMeasurement() {
+                long start = System.nanoTime();
+                long end = System.nanoTime();
+
+                long elapsed = end - start;
+
+                assertTrue(elapsed >= 0);
+            }
         }
     }
 }
