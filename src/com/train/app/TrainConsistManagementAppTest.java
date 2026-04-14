@@ -1,30 +1,44 @@
 @Test
-void testCargo_SafeAssignment() {
-    TrainConsistManagementApp.GoodsBogie bogie =
-            new TrainConsistManagementApp.GoodsBogie("Cylindrical");
+void testSort_BasicSorting() {
+    int[] arr = {72, 56, 24, 70, 60};
 
-    assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
+    int[] result = TrainConsistManagementApp.bubbleSort(arr);
+
+    assertArrayEquals(new int[]{24, 56, 60, 70, 72}, result);
 }
 
 @Test
-void testCargo_UnsafeAssignmentHandled() {
-    TrainConsistManagementApp.GoodsBogie bogie =
-            new TrainConsistManagementApp.GoodsBogie("Rectangular");
+void testSort_AlreadySortedArray() {
+    int[] arr = {24, 56, 60, 70, 72};
 
-    // should not crash due to try-catch
-    assertDoesNotThrow(() -> bogie.assignCargo("Petroleum"));
+    int[] result = TrainConsistManagementApp.bubbleSort(arr);
+
+    assertArrayEquals(new int[]{24, 56, 60, 70, 72}, result);
 }
 
 @Test
-void testCargo_ProgramContinuesAfterException() {
-    TrainConsistManagementApp.GoodsBogie b1 =
-            new TrainConsistManagementApp.GoodsBogie("Rectangular");
+void testSort_DuplicateValues() {
+    int[] arr = {72, 56, 56, 24};
 
-    TrainConsistManagementApp.GoodsBogie b2 =
-            new TrainConsistManagementApp.GoodsBogie("Cylindrical");
+    int[] result = TrainConsistManagementApp.bubbleSort(arr);
 
-    b1.assignCargo("Petroleum"); // handled
-    b2.assignCargo("Coal");      // should still execute
+    assertArrayEquals(new int[]{24, 56, 56, 72}, result);
+}
 
-    assertTrue(true); // program did not crash
+@Test
+void testSort_SingleElementArray() {
+    int[] arr = {50};
+
+    int[] result = TrainConsistManagementApp.bubbleSort(arr);
+
+    assertArrayEquals(new int[]{50}, result);
+}
+
+@Test
+void testSort_AllEqualValues() {
+    int[] arr = {40, 40, 40};
+
+    int[] result = TrainConsistManagementApp.bubbleSort(arr);
+
+    assertArrayEquals(new int[]{40, 40, 40}, result);
 }
