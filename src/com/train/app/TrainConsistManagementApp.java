@@ -1,45 +1,41 @@
 package com.train.app;
 
 import java.util.*;
-
-// Bogie Class (Custom Object)
-class Bogie {
-    String name;
-    int capacity;
-
-    public Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
-
-    public String toString() {
-        return name + " (Capacity: " + capacity + ")";
-    }
-}
+import java.util.stream.Collectors;
 
 public class TrainConsistManagementApp {
 
+    public static class Bogie {
+        String name;
+        int capacity;
+
+        public Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+    }
+
+    // METHOD FOR TESTING
+    public static int calculateTotalCapacity(List<Bogie> bogies) {
+        return bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
+    }
+
     public static void main(String[] args) {
 
-        System.out.println("=================================");
-        System.out.println("UC7 - Sort Bogies by Capacity");
-        System.out.println("=================================\n");
+        System.out.println("====================================");
+        System.out.println("UC10 - Total Train Seating Capacity");
+        System.out.println("====================================\n");
 
-        // List of Bogie Objects
         List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 60));
         bogies.add(new Bogie("First Class", 40));
 
-        System.out.println("Before Sorting:");
-        System.out.println(bogies);
+        int total = calculateTotalCapacity(bogies);
 
-        // Sorting using Comparator (Lambda)
-        bogies.sort(Comparator.comparingInt(b -> b.capacity));
-
-        System.out.println("\nAfter Sorting (by Capacity):");
-        System.out.println(bogies);
+        System.out.println("Total Seating Capacity: " + total);
     }
 }
