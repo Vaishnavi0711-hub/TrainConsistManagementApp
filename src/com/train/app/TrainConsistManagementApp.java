@@ -1,29 +1,31 @@
 package com.train.app;
 
-import java.util.Arrays;
-
 public class TrainConsistManagementApp {
 
-    // UC17 METHOD
-    public static String[] sortBogieNames(String[] bogies) {
-        Arrays.sort(bogies);
-        return bogies;
+    // UC18 METHOD (LINEAR SEARCH)
+    public static boolean linearSearch(String[] bogies, String key) {
+
+        for (String id : bogies) {
+            if (id.equals(key)) {
+                return true; // found
+            }
+        }
+        return false; // not found
     }
 
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC17 - Sort Bogie Names");
+        System.out.println("UC18 - Linear Search for Bogie ID");
         System.out.println("====================================\n");
 
-        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+        String[] bogieIds = {"BG101","BG205","BG309","BG412","BG550"};
 
-        System.out.println("Before Sorting:");
-        System.out.println(Arrays.toString(bogieNames));
+        String searchKey = "BG309";
 
-        sortBogieNames(bogieNames);
+        boolean found = linearSearch(bogieIds, searchKey);
 
-        System.out.println("\nAfter Sorting:");
-        System.out.println(Arrays.toString(bogieNames));
+        System.out.println("Searching for: " + searchKey);
+        System.out.println("Found? " + found);
     }
 }
