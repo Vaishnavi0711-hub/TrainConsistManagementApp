@@ -65,5 +65,23 @@ public class TrainConsistManagementAppTest {
         TrainConsistManagementApp.filterBogies(list, 50);
 
         assertEquals(1, list.size()); // original list unchanged
+        @Test
+        void testSafety_AllValid() {
+            List<TrainConsistManagementApp.GoodsBogie> bogies = new ArrayList<>();
+
+            bogies.add(new TrainConsistManagementApp.GoodsBogie("Cylindrical", "Petroleum"));
+            bogies.add(new TrainConsistManagementApp.GoodsBogie("Rectangular", "Coal"));
+
+            assertTrue(TrainConsistManagementApp.isTrainSafe(bogies));
+        }
+
+        @Test
+        void testSafety_InvalidCase() {
+            List<TrainConsistManagementApp.GoodsBogie> bogies = new ArrayList<>();
+
+            bogies.add(new TrainConsistManagementApp.GoodsBogie("Cylindrical", "Coal"));
+
+            assertFalse(TrainConsistManagementApp.isTrainSafe(bogies));
+        }
     }
 }
