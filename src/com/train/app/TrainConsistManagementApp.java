@@ -1,31 +1,62 @@
 package com.train.app;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TrainConsistManagementApp {
 
-    private List<String> trainConsist;
+    private List<String> passengerBogies;
+    private Set<String> bogieIds; // UC3
 
-    // Constructor (UC1)
     public TrainConsistManagementApp() {
-        trainConsist = new ArrayList<>();
+        passengerBogies = new ArrayList<>();
+        bogieIds = new HashSet<>(); // UC3
     }
 
-    // Method to get size
-    public int getBogieCount() {
-        return trainConsist.size();
+    // UC2 Methods
+    public void addBogie(String bogie) {
+        passengerBogies.add(bogie);
+    }
+
+    public void removeBogie(String bogie) {
+        passengerBogies.remove(bogie);
+    }
+
+    public boolean containsBogie(String bogie) {
+        return passengerBogies.contains(bogie);
+    }
+
+    public void displayBogies() {
+        System.out.println("Passenger Bogies: " + passengerBogies);
+    }
+
+    // UC3 Methods
+    public void addBogieId(String id) {
+        bogieIds.add(id); // duplicates automatically ignored
+    }
+
+    public void displayBogieIds() {
+        System.out.println("Unique Bogie IDs: " + bogieIds);
     }
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("UC1 - Initialize Train Consist");
+        System.out.println("UC3 - Track Unique Bogie IDs");
         System.out.println("=================================\n");
 
         TrainConsistManagementApp app = new TrainConsistManagementApp();
 
-        System.out.println("Initial Bogie Count: " + app.getBogieCount());
-        System.out.println("Train Consist Initialized Successfully");
+        // Adding IDs (with duplicates)
+        app.addBogieId("BG101");
+        app.addBogieId("BG102");
+        app.addBogieId("BG103");
+        app.addBogieId("BG104");
+
+        // Duplicate entries
+        app.addBogieId("BG101");
+        app.addBogieId("BG102");
+
+        // Display unique IDs
+        app.displayBogieIds();
     }
 }
