@@ -4,38 +4,39 @@ import java.util.*;
 
 public class TrainConsistManagementApp {
 
-    private LinkedHashSet<String> trainFormation; // UC5
+    private Map<String, Integer> bogieCapacityMap; // UC6
 
     public TrainConsistManagementApp() {
-        trainFormation = new LinkedHashSet<>();
+        bogieCapacityMap = new HashMap<>();
     }
 
-    // UC5 Logic
-    public void buildFormation() {
+    // UC6 Logic
+    public void addBogieCapacity() {
 
-        // Add bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
-
-        // Attempt duplicate
-        trainFormation.add("Sleeper"); // ignored automatically
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair", 60);
+        bogieCapacityMap.put("First Class", 40);
     }
 
-    public void displayFormation() {
-        System.out.println("Train Formation: " + trainFormation);
+    public void displayBogieCapacity() {
+
+        System.out.println("Bogie Capacity Details:\n");
+
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            System.out.println("Bogie: " + entry.getKey() +
+                    " | Capacity: " + entry.getValue());
+        }
     }
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("UC5 - LinkedHashSet Formation");
+        System.out.println("UC6 - Bogie Capacity Mapping");
         System.out.println("=================================\n");
 
         TrainConsistManagementApp app = new TrainConsistManagementApp();
 
-        app.buildFormation();
-        app.displayFormation();
+        app.addBogieCapacity();
+        app.displayBogieCapacity();
     }
 }
