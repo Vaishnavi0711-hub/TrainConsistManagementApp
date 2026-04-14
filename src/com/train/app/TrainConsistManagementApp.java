@@ -2,41 +2,44 @@ package com.train.app;
 
 import java.util.*;
 
+// Bogie Class (Custom Object)
+class Bogie {
+    String name;
+    int capacity;
+
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String toString() {
+        return name + " (Capacity: " + capacity + ")";
+    }
+}
+
 public class TrainConsistManagementApp {
-
-    private Map<String, Integer> bogieCapacityMap; // UC6
-
-    public TrainConsistManagementApp() {
-        bogieCapacityMap = new HashMap<>();
-    }
-
-    // UC6 Logic
-    public void addBogieCapacity() {
-
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 60);
-        bogieCapacityMap.put("First Class", 40);
-    }
-
-    public void displayBogieCapacity() {
-
-        System.out.println("Bogie Capacity Details:\n");
-
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
-        }
-    }
 
     public static void main(String[] args) {
 
         System.out.println("=================================");
-        System.out.println("UC6 - Bogie Capacity Mapping");
+        System.out.println("UC7 - Sort Bogies by Capacity");
         System.out.println("=================================\n");
 
-        TrainConsistManagementApp app = new TrainConsistManagementApp();
+        // List of Bogie Objects
+        List<Bogie> bogies = new ArrayList<>();
 
-        app.addBogieCapacity();
-        app.displayBogieCapacity();
+        // Add bogies
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("First Class", 40));
+
+        System.out.println("Before Sorting:");
+        System.out.println(bogies);
+
+        // Sorting using Comparator (Lambda)
+        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+
+        System.out.println("\nAfter Sorting (by Capacity):");
+        System.out.println(bogies);
     }
 }
