@@ -1,41 +1,31 @@
 package com.train.app;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.regex.*;
 
 public class TrainConsistManagementApp {
 
-    public static class Bogie {
-        String name;
-        int capacity;
-
-        public Bogie(String name, int capacity) {
-            this.name = name;
-            this.capacity = capacity;
-        }
+    // METHOD FOR TRAIN ID VALIDATION
+    public static boolean validateTrainId(String trainId) {
+        String regex = "TRN-\\d{4}";
+        return Pattern.matches(regex, trainId);
     }
 
-    // METHOD FOR TESTING
-    public static int calculateTotalCapacity(List<Bogie> bogies) {
-        return bogies.stream()
-                .map(b -> b.capacity)
-                .reduce(0, Integer::sum);
+    // METHOD FOR CARGO CODE VALIDATION
+    public static boolean validateCargoCode(String cargoCode) {
+        String regex = "PET-[A-Z]{2}";
+        return Pattern.matches(regex, cargoCode);
     }
 
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC10 - Total Train Seating Capacity");
+        System.out.println("UC11 - Regex Validation");
         System.out.println("====================================\n");
 
-        List<Bogie> bogies = new ArrayList<>();
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
 
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 60));
-        bogies.add(new Bogie("First Class", 40));
-
-        int total = calculateTotalCapacity(bogies);
-
-        System.out.println("Total Seating Capacity: " + total);
+        System.out.println("Train ID Valid: " + validateTrainId(trainId));
+        System.out.println("Cargo Code Valid: " + validateCargoCode(cargoCode));
     }
 }
